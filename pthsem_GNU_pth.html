@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+   <title>pthsem / GNU pth</title>
+<link rel="stylesheet" type="text/css" href="/~mkoegler/layout.css">
+</head>
+<body>
+<table class="layout"><tr>
+<td class="l">
+<div class="toc">Content</div>
+<div class="t1"><a href="/~mkoegler/index.php/index">Index</a></div>
+<div class="t1"><a href="/~mkoegler/index.php/spssim">SPSSIM</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/spssim1">Teil 1</a></div>
+<div class="t3"><a href="/~mkoegler/index.php/spsautotest">Testprogramm</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/spssim2">Teil 2</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/spssim3">Teil 3</a></div>
+<div class="t1">pthsem / GNU pth</div>
+<div class="t1"><a href="/~mkoegler/index.php/bcus">GNU-Toolchain for BCUs</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/bcusdk">BCU SDK</a></div>
+<div class="t3"><a href="/~mkoegler/index.php/bcudoc">BCU manuals</a></div>
+<div class="t3"><a href="/~mkoegler/index.php/bcucygwin">using Cygwin</a></div>
+<div class="t3"><a href="/~mkoegler/index.php/eibd">EIBD</a></div>
+<div class="t3"><a href="/~mkoegler/index.php/bcusdk_examples">BCU SDK examples</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/model">Programming Model</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/binutils">Binutils</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/sim">m68hc05-sim</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/dejagnu">dejagnu</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/newlib">newlib</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/gdb">m68hc05-gdb</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/gcc">m68hc05-gcc</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/eibdriver">EIB Linux Kernel Driver</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/tpuart">TPUART board</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/eibdeb">Debian Packages</a></div>
+<div class="t3"><a href="/~mkoegler/index.php/eibnslu">NSLU2</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/eibrpm">RPM Packages</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/eibgit">Development versions</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/bcuproj">SF.net project</a></div>
+<div class="t2"><a href="/~mkoegler/index.php/bcuwiki">Wiki</a></div>
+<div class="t1"><a href="/~mkoegler/index.php/knxlive">KNXLive!</a></div>
+<div class="t1"><a href="/~mkoegler/index.php/tlsvnc">TLS for VNC</a></div>
+</td>
+<td class="r">
+<h1>
+pthsem / GNU pth</h1>
+<a href="http://www.gnu.org/software/pth">GNU pth</a> is a user mode multi threading library.<p>
+pthsem is a fork, with support for semaphores added. It can be installed
+parallel to a normal pth and provides a compatibilty layer to compile GNU pth programs with pthsem. 
+The header file is called <b>pthsem.h</b>, the configuration programm
+<b>pthsem-config</b> and the autoconf macro <b>AC_CHECK_PTHSEM</b>. If references to one of these
+names are changed, pthsem can be used as an replacement of GNU pth.
+<p>
+The current version is <a href="/~mkoegler/pth/pthsem_2.0.8.tar.gz">pthsem_2.0.8.tar.gz</a>.
+<p>
+<p>
+<a href="/~mkoegler/index.php/eibdeb">Debian Packages</a><br>
+<a href="/~mkoegler/index.php/eibrpm">RPM Packages</a><p>
+To build the Debian package, download the tar.gz and extract it, change into the created directory and then run 
+<pre>
+chmod a+x debian/rules
+dpkg-buildpackage -rfakeroot
+</pre>
+
+To build the RPM, download the tar.gz and run
+<pre>
+rpmbuild -ta <b>filename</b>
+</pre>
+For other distributions, extract the tar file and run
+<pre>
+./configure
+make
+make install
+</pre>
+
+<h3>Changelog</h3>
+<ul>
+<li>pthsem 2.0.4
+<ul>
+<li><a href="/~mkoegler/pth/pth-sem.patch">patch</a>, which add support for semaphores for <a href="/~mkoegler/pth/pth.tar.gz">this cvs snapshot (2.0.4)</a>.
+<li>If you want to compile version 2.0.4 on cygwin, you need also apply the patch <a href="/~mkoegler/pth/pth-cygwin.patch">pth-cygwin.patch</a>.
+</ul>
+<li> The <a href="/~mkoegler/pth/pthsem-2.0.5.tar.gz">version 2.0.5</a> includes more bug fixes, a documentation update
+and some rebranding in the autoconf macro. Packaging scripts for RPM and Debian are included. All patches are included.
+<li> pthsem-2.0.7 is a maintainance release, which is based on pth 2.0.7
+<li> changes in pthsem-2.0.8:
+<ul>
+<li>Monotonic clock support to cope with system time changes
+<li>Switch to automake based build system
+<li>compat package for building pth applications with pthsem
+</ul>
+</ul>
+<h3>Documentation</h3>
+The interface provides functions to set/get the value of
+a semaphore, increment it with arbitrary values, wait, until
+the value becomes bigger than a given value (without or with
+decrementing, if the condition becomes true.<p>
+
+The data-type for the semaphore is names pth_sem_t and
+it has an initializer like pth_cond_t.<p>
+
+The functions are:
+<table border=1><tr><td>
+int pth_sem_init(pth_sem_t *sem)</td><td>
+        initialize sem (used like pth_cond_init)</td></tr>
+<tr><td>
+int pth_sem_dec(pth_sem_t *sem)</td><td>
+        waits, until the value of sem is >= 1 and decrement it.</td></tr>
+<tr><td>
+int pth_sem_dec_value(pth_sem_t *sem, unsigned value)</td><td>
+        waits, until the value of sem is >= value and subtracts value</td></tr>
+<tr><td>
+int pth_sem_inc(pth_sem_t *sem, int notify)</td><td>
+        increments sem. the scheduler is started, if notify is not null</td></tr>
+<tr><td>
+int pth_sem_inc_value(pth_sem_t *sem, unsigned value, int notify)</td><td>
+        adds value to sem. the sheduler is started, if notify is not null</td></tr>
+<tr><td>
+int pth_sem_set_value(pth_sem_t *sem, unsigned value)</td><td>
+        sets the value of sem to value</td></tr>
+<tr><td>
+int pth_sem_get_value(pth_sem_t *sem, unsigned *value)</td><td>
+        stores the value of sem in *value</td></tr>
+</table>
+<p>
+events for waiting for an semaphore can be create with
+PTH_EVENT_SEM in the specs-parameter of pth_event. Then
+a pointer to a semaphore is expected as parameter.
+<p>
+Additionally there two flags:
+<ul><li>
+PTH_UNTIL_DECREMENT<br>
+        decrement, the value of the semaphore, if the
+        value of the semaphore is big enough.
+        If the flag is not specified, the lock will not
+        be obtained, the event will occur, if obtaining
+        a lock would be possible.
+
+<li>PTH_UNTIL_COUNT<br>
+        as an additional parameter, an unsigned int
+        is passed. The event will occur, if the
+        value of the semaphore is >= this parameter.
+        If the flag is not specified, 1 is used as
+        default.
+</ul>
+eg:
+<ul>
+<li>pth_event(PTH_EVENT_SEM|PTH_UNTIL_DECREMENT|PTH_UNTIL_COUNT, &sem,2)<br>
+        event waits, utils the value of the semaphore is >= 2 and
+        subtracts then two from it
+
+<li>pth_event(PTH_EVENT_SEM|PTH_UNTIL_COUNT, &sem,2)<br>
+        event waits, util the value of the semaphore is >= 2
+
+<li>pth_event(PTH_EVENT_SEM|PTH_UNTIL_DECREMENT, &sem)<br>
+        event waits, util the value of the semaphore is >= 1 and
+        subtracts then 1 from it
+
+<li>pth_event(PTH_EVENT_SEM, &sem)<br>
+        event waits, util the value of the semaphore is >= 1
+</ul>
+
+The interface is so open, that the semphores can be used for
+various purposes.
+<p>
+
+The new event type PTH_EVENT_RTIME is a time interval event. The additional argument has to be of
+type <b>pth_time_t</b> (usually on-the-fly generated via pth_time(3)),
+containing a time interval. During creation, it is converted into
+PTH_EVENT_TIME. It has the advantage, that it only uses the pthsem
+internal clock.Example:<br>
+<b>pth_event(PTH_EVENT_TIME, pth_timeout(2,0))</b><br>
+is equal to<br>
+<b>pth_event(PTH_EVENT_RTIME, pth_time(2,0))</b>
+<p>
+<img src="http://www.auto.tuwien.ac.at/~mkoegler/banner1.jpg" width="740" height="50"\/>
