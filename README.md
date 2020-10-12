@@ -15,3 +15,4 @@ As long as the original webpage is alive, we recommend to get your copy of pthse
 # Documentation
 
 Read the original [README file](/README) that is part of Martin's work for details about what pthsem is. You will find valuable information on Martin's webpage as well.
+This repo also contains a copy of [the documentation found on Martin's website](https://www.auto.tuwien.ac.at/~mkoegler/index.php/pth). It is stored as the [pthsem_GNU_pth.html](pthsem_GNU_pth.html) file.
