@@ -1426,8 +1426,8 @@ ac_cv_stacksetup_$1='guessed:(skaddr),(sksize)'
 ])
 dnl #   restore original compile environment
 CFLAGS="$OCFLAGS"
-])dnl
 fi
+])dnl
 dnl #   extract result ingredients of single cached result value
 type=`echo $ac_cv_stacksetup_$1 | sed -e 's;:.*$;;'`
 addr=`echo $ac_cv_stacksetup_$1 | sed -e 's;^.*:;;' -e 's;,.*$;;'`
