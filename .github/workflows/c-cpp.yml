@@ -1,0 +1,48 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches:
+        - master
+  pull_request:
+    branches: [ master ]
+
+  # Allow manual triggers from github.
+  workflow_dispatch:
+
+  schedule:
+    # At midnight every Saturday.
+    - cron: 0 0 * * 6
+
+env:
+  # Force timezone to central european or unit tests checking DST/standard time switches will fail (those switches do not occur at the same time in all timezones).
+  TZ: CET
+
+jobs:
+  # Job building pthsem with the different gcc versions that are later required by the linknx build
+  #
+  pthsem-build:
+    runs-on: ubuntu-latest
+    name: Build pthsem
+
+    strategy:
+        matrix:
+            gcc-version: [10, 11, 12]
+
+    env:
+        CC: gcc-${{ matrix.gcc-version }}
+        CXX: g++-${{ matrix.gcc-version }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: install required dependencies
+      run: sudo apt install g++-${{ matrix.gcc-version }}
+      
+    - name: build pthsem
+      # Build and deploy pthsem to '/tmp/pthseminstalldir'. This dir is reused later in the process
+      # so make sure to update all references to it in this file.
+      # It is important that the job for linknx deploys pthsem to the same directory because
+      # configure has hardcoded some paths in the deployed files.
+      # --disable-shared helps to pass the pthtest when configuring linknx.
+      run: ./configure --disable-shared --prefix=/tmp/pthseminstalldir && make test && make install
